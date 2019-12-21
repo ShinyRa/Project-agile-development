@@ -1,0 +1,13 @@
+button {
+	transition: border ease-out 0.3s;
+	border: none;
+    border-bottom: 2px solid #b00a11;
+    background: linear-gradient(45deg, #B52F43 0%,#9B3A75 100%);
+    color: white;
+    border-radius: 7px;
+    padding: 8px 180px;
+}
+
+button:hover {
+	cursor: pointer;
+}

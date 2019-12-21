@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <title>Amsta04 - Bingo</title>
+	
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="Resources/Css/bingo.css">
+	<link rel="stylesheet" type="text/css" href="Resources/Css/Components/modal.css">
+	<link rel="stylesheet" type="text/css" href="Resources/Css/Components/button.css">
+	<link href="https://unpkg.com/bootstrap@4.0.0/dist/css/bootstrap.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+
+	<!-- Import javascript libraries -->
+	
+	
+	<!-- Javascript imports -->
+
+	<!-- Src/Resources/Js/* -->
+	<script src="Resources/Js/jquery-3.3.1.slim.min.js"></script>
+	<script src="Resources/Js/p5.min.js"></script>
+	<script src="Resources/Js/p5.sound.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/addons/p5.dom.js"></script>
+	
+	<!-- Src/Resources/Js/Routing/* -->
+	<script type="text/javascript" src="Resources/Js/Routing/python.js"></script>
+	<script type="text/javascript" src="Resources/Js/Routing/ajax.js"></script>
+
+	<!-- Src/Game/Utils/* -->
+	<script type="text/javascript" src="Game/Utils/StateSwitcher.js"></script>
+	<script type="text/javascript" src="Game/Utils/ResourceManager.js"></script>
+
+	<!-- Src/Game/States/* -->
+	<script type="text/javascript" src="Game/States/BaseGameState.js"></script>
+	<script type="text/javascript" src="Game/States/GameOverState.js"></script>
+	<script type="text/javascript" src="Game/States/IntroState.js"></script>
+	<script type="text/javascript" src="Game/States/AddNamesToPlayingState.js"></script>
+	<script type="text/javascript" src="Game/States/PlayingState.js"></script>
+
+	<!-- Src/Game/GameObjects/* -->
+	<script src="Game/GameObjects/GameObject.js"></script>
+	<script src="Game/GameObjects/Bingo.js"></script>
+	<script src="Game/GameObjects/Ball.js"></script>
+
+	<!-- Src/Game/Animation/* -->
+	<script type="text/javascript" src="Game/Animation/PulsingText.js"></script>
+	<script type="text/javascript" src="Game/Animation/BallViewer.js"></script>
+
+	<!-- Src/* -->
+	<script type="text/javascript" src="Game/bingoSketch.js"></script>
+</head>
+<body>
+	<span class="menu" style="font-size:30px;cursor:pointer; background: none;" onclick="openMenu()">&#9776; Menu</span>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+		<a id="getallenList">Getallen</a>
+		<a href="" onclick="stateSwitcher.switchTo(2);">Refresh</a>
+		<a onclick="stateSwitcher.getCurrentState().stopButtonPlayingState(this);">Stop</a>
+	</div>
+
+	<!-- The Modal -->
+	<div id="getallenModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h1 class="middle">Getallen lijst</h1>
+			<hr>
+			<p id="modalcontent" class="modal-p-content"></p>
+		</div>
+
+	</div>
+
+	<section class="name-input">
+		<div class="md-form form-lg">
+			<input type="text" id="name-input-id" class="form-control form-control-lg">
+		</div>
+
+		<button class="button-override" onclick="stateSwitcher.getCurrentState().handleAddButtonPress(this);">Voeg toe</button>
+		<button class="button-override" onclick="stateSwitcher.getCurrentState().handleStartButtonPress(this);">Start</button>
+
+	</section>
+
+	<section class="controls">
+		<div class="middle">
+			<h3>Laatste ballen</h3>
+		</div>
+		<div class="row" style="margin-bottom: 1%; border-style: solid; border-color: black; border-width: 1px">
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#E91E63" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#03A9F4" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#9C27B0" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#673AB7" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#4CAF20" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#009688" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#673AB7" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#9C27B0" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#03A9F4" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#4CAF20" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#9C27B0" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+			<div class="col-md-1">
+				<svg height="125" width="150">
+					<circle cx="50" cy="50" r="45" stroke="black" stroke-width="1" fill="#E91E63" />
+					<text x="40%" y="60%" text-anchor="middle" font-size="32px"></text>
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</div>
+		</div>
+		<button onclick="stateSwitcher.getCurrentState().handleButtonPress(this);">Next!</button>
+	</section>
+</body>
+</html>
