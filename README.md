@@ -1,5 +1,6 @@
-# Amsta04-bingo-node
+# Amsta bingo
 
+## Introductie video :film_projector:
 [![](http://img.youtube.com/vi/VPaP7G3Ek6U/0.jpg)](http://www.youtube.com/watch?v=VPaP7G3Ek6U "")
 
 De opvolger van het eerste project Fasten your seatbelts, project agile development.
