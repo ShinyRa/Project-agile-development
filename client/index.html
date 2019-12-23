@@ -56,17 +56,38 @@
 		<a id="getallenList">Getallen</a>
 		<a href="" onclick="stateSwitcher.switchTo(2);">Refresh</a>
 		<a onclick="stateSwitcher.getCurrentState().stopButtonPlayingState(this);">Stop</a>
+		<a onclick="stateSwitcher.getCurrentState().BingoPlayingState(this);">Bingo</a>
 	</div>
 
-	<!-- The Modal -->
+	<!-- The getallen Modal -->
 	<div id="getallenModal" class="modal">
 
 		<!-- Modal content -->
 		<div class="modal-content">
 			<span class="close">&times;</span>
-			<h1 class="middle">Getallen lijst</h1>
+			<h1 class="middle">Getallenlijst</h1>
 			<hr>
-			<p id="modalcontent" class="modal-p-content"></p>
+			<p id="getallenmodalcontent" class="modal-p-content"></p>
+		</div>
+
+	</div>
+
+	<!-- The Bingo Modal -->
+	<div id="bingoModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span id="closeBingo" class="close">&times;</span>
+			<h1 class="middle">Bingo!</h1>
+			<hr>
+			<h3 class="middle">Selecteer de speler die heeft gewonnen:</h3>
+			<select id="bingoSelectName" class="browser-default custom-select">
+				<option selected>Selecteer een naam</option>
+			</select>
+			<button id="bingoSaveWinnerButton" class="button-override" onclick="">Zet winnaar</button>
+			<hr>
+			<h3 class="middle">Getallen die getrokken zijn:</h3>
+			<p id="bingomodalcontent" class="modal-p-content"></p>
 		</div>
 
 	</div>

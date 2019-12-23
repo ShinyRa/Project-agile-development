@@ -16,13 +16,14 @@ class GameOverState extends BaseGameState
 			window.innerHeight / 3,
 			40
 		);
-		this.text1 = new PulsingText(
+		this.text2 = new PulsingText(
 			"Bedankt voor het spelen!",
 			window.innerWidth  / 2,
-			window.innerHeight / 2,
+			window.innerHeight / 1.5,
 			40
 		);
-
+		resourceManager = new ResourceManager();
+		resourceManager.load('im_so_excited.mp3', 'im_so_excited', 'sound');
 	}
 
 	draw()
@@ -30,6 +31,7 @@ class GameOverState extends BaseGameState
 		background(255);
 		this.text.draw();
 		this.text1.draw();
+		this.text2.draw();
 		for (let currentBall in this.backgroundBalls) {
 			this.backgroundBalls[currentBall].draw();
 			this.backgroundBalls[currentBall].update();
@@ -70,6 +72,12 @@ class GameOverState extends BaseGameState
 	{
 		this.namesArray = stateSwitcher.getState(1).getNamesArray();
 		this.fillBallsArray(this.namesArray);
+		this.text1 = new PulsingText(
+			"Winnaar is: "+  stateSwitcher.getState(2).getWinner() +"!",
+			window.innerWidth  / 2,
+			window.innerHeight / 2,
+			40
+		);
 		/*this.song=loadSound('downloads/I_m so excited.mp3');
 		this.gif=createImage("../client/downloads/GIF(dans).gif");*/
 

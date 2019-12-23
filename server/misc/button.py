@@ -6,17 +6,17 @@ knop  = Button(3)
 knop2 = Button(2)
 
 
-connection = pymysql.connect(host=':) nothing to see here...',
-                                             user=':) nothing to see here...',
-                                             password=':) nothing to see here...',
-                                             db=':) nothing to see here...',
+connection = pymysql.connect(host='localhost',
+                                             user='bingo',
+                                             password='amsta04-bingo',
+                                             db='paddatabase',
                                              charset='utf8mb4',
                                              cursorclass=pymysql.cursors.DictCursor)
 while True:
         if knop.is_pressed:
             try:
                 with connection.cursor() as cursor:
-                    sql = "UPDATE Buttons SET button1 = 1"
+                    sql = "UPDATE buttons SET button1 = 1"
                     cursor.execute(sql)
                     connection.commit()
             finally:
@@ -25,7 +25,7 @@ while True:
         if knop2.is_pressed:
             try:
                 with connection.cursor() as cursor:
-                    sql = "UPDATE Buttons SET button2 = 1"
+                    sql = "UPDATE buttons SET button2 = 1"
                     cursor.execute(sql)
                     connection.commit()
             finally:

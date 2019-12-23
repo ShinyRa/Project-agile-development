@@ -2,10 +2,10 @@ const mysql   = require('mysql');
 const request = require('request');
 
 const connection = mysql.createPool({
-    host     : ':) nothing to see here...',
-    user     : ':) nothing to see here...',
-    password : ':) nothing to see here...',
-	database : ':) nothing to see here...'
+    host     : 'localhost',
+    user     : 'bingo',
+    password : 'amsta04-bingo',
+	database : 'paddatabase'
 });
 
 module.exports = {
@@ -34,13 +34,13 @@ module.exports = {
 	generateDatabase: function(){
 		connection.getConnection(function(err, connection) {
 		if (err) throw err;
-			connection.query("CREATE DATABASE padDatabase",(err, rows, fields) => {
+			connection.query("CREATE DATABASE paddatabase",(err, rows, fields) => {
 
 
 				if (err) console.log(err);
 				console.log(rows);
 			});
-			connection.query("CREATE TABLE Buttons (button1 BOOLEAN, button2 BOOLEAN)",(err, rows, fields) => {
+			connection.query("CREATE TABLE buttons (button1 BOOLEAN, button2 BOOLEAN)",(err, rows, fields) => {
 
 
 				if (err) console.log(err);

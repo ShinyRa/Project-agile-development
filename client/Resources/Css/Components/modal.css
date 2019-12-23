@@ -39,3 +39,6 @@
     text-decoration: none;
     cursor: pointer;
 }
+.custom-select{
+    margin-bottom: 1% !important;
+}

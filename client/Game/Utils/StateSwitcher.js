@@ -17,12 +17,17 @@ class StateSwitcher
     	this.states = states;
 	}
 
+	getStates()
+	{
+		return this.states;
+	}
+
 	getCurrentState()
 	{
 		return this.states[this.currentStateIndex];
 	}
 
-	getState(stateIndex)
+	getState( stateIndex )
 	{
 		return this.states[stateIndex];
 	}

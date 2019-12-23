@@ -6,6 +6,7 @@ class PlayingState extends BaseGameState
 
 		this.ballViewer = new BallViewer();
 		this.bingo = new Bingo(this.ballViewer.getRandomBallColourHex());
+		this.winner = "";
         this.text = new PulsingText(
             "",
             window.innerWidth  / 2,
@@ -35,7 +36,9 @@ class PlayingState extends BaseGameState
 	}
 
 	handleMouseClick(canvas)
-	{ }
+	{
+
+	}
 
 	/**
 	 * Get State name.
@@ -44,6 +47,14 @@ class PlayingState extends BaseGameState
 	{
 		return "PlayingState";
 	}
+
+	setWinner(name){
+	    this.winner = name;
+    }
+
+    getWinner(){
+        return this.winner;
+    }
 
 	handleButtonPress()
 	{
@@ -99,7 +110,7 @@ class PlayingState extends BaseGameState
 	{
 		ajaxRequest('GET', '/getbutton2', (data, xhr) => {
 			if (data[0]["button2"] == 1) {
-				this.bingo.show();
+				this.BingoPlayingState();
 
 			}
 			ajaxRequest('GET', '/setbutton2', (data, xhr) => {
@@ -120,21 +131,25 @@ class PlayingState extends BaseGameState
 	{
 		let roundNumber;
 		let modal = document.getElementById("getallenModal");
-		let modalContent = document.getElementById("modalcontent");
-		let btn = document.getElementById("getallenList");
+		let modalContent = document.getElementById("getallenmodalcontent");
 		let span = document.getElementsByClassName("close")[0];
 
 		let drawnballs = this.ballViewer.getDrawnBallsList();
 
-		btn.onclick = function() {
-			this.ballViewer = new BallViewer();
+		$('body').on('click', '#getallenList', () => {
 			roundNumber = this.ballViewer.getRoundNum();
-			console.log(roundNumber);
-			for (let i = 0; i < 75; i++) {
-				modalContent.innerHTML += drawnballs[i].message  + ", ";
+
+			for (let i = 0; i < roundNumber; i++) {
+				if (roundNumber - i === 1){
+					modalContent.innerHTML += drawnballs[i].message;
+
+				}
+				else {
+					modalContent.innerHTML += drawnballs[i].message  + ", ";
+				}
 			}
 			modal.style.display = "block";
-		};
+		});
 
 		span.onclick = function() {
 			modal.style.display = "none";
@@ -145,6 +160,53 @@ class PlayingState extends BaseGameState
 			if (event.target == modal) {
 				modal.style.display = "none";
 				modalContent.innerHTML = "";
+			}
+		}
+	}
+
+	BingoPlayingState()
+	{
+		let roundNumber;
+		let bingoModal = document.getElementById("bingoModal");
+		let bingoModalContent = document.getElementById("bingomodalcontent");
+		let bingoSpan = document.getElementById("closeBingo");
+		let selectBingoName = document.getElementById("bingoSelectName");
+		let bingoSaveWinnerButton = document.getElementById("bingoSaveWinnerButton");
+
+		let drawnballs = this.ballViewer.getDrawnBallsList();
+			roundNumber = this.ballViewer.getRoundNum();
+		for (let i = 0; i < roundNumber; i++) {
+			if (roundNumber - i === 1){
+				bingoModalContent.innerHTML += drawnballs[i].message;
+			}
+			else {
+				bingoModalContent.innerHTML += drawnballs[i].message  + ", ";
+			}
+		}
+			bingoModal.style.display = "block";
+
+			$("#bingoSelectName").empty();
+		for(let i = 0; i < this.namesArray.length; i++) {
+			let opt = document.createElement('option');
+			opt.innerHTML = this.namesArray[i];
+			opt.value = this.namesArray[i];
+			selectBingoName.appendChild(opt);
+		}
+
+        $('body').on('click', '#bingoSaveWinnerButton', () => {
+            this.setWinner(selectBingoName.options[ selectBingoName.selectedIndex ].value);
+
+        });
+
+		bingoSpan.onclick = function() {
+			bingoModal.style.display = "none";
+			bingoModalContent.innerHTML = "";
+		};
+
+		window.onclick = function(event) {
+			if (event.target == bingoModal) {
+				bingoModal.style.display = "none";
+				bingoModalContent.innerHTML = "";
 			}
 		}
 	}

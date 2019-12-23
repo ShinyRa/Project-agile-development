@@ -89,7 +89,7 @@ class BallViewer extends GameObject
 		resourceManager.load('dans.gif', 'dans', 'gif');
 		resourceManager.load('im_so_excited.mp3', 'im_so_excited', 'sound');
 		resourceManager.get('im_so_excited').setVolume(0.1);
-		resourceManager.get('dans').position(50, 80);
+		resourceManager.get('dans').position(600, 400);
 	}
 
 	getRoundNum()
